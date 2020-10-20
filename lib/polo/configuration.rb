@@ -4,7 +4,7 @@ module Polo
     attr_reader :on_duplicate_strategy, :blacklist, :adapter
 
     def initialize(options={})
-      options = { on_duplicate: nil, obfuscate: {}, adapter: :mysql }.merge(options)
+      options = { on_duplicate: nil, obfuscate: {}, adapter: :postgres }.merge(options)
       @adapter = options[:adapter]
       @on_duplicate_strategy = options[:on_duplicate]
       obfuscate(options[:obfuscate])
