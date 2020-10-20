@@ -23,11 +23,13 @@ module Polo
     def to_sql
       case @configuration.on_duplicate_strategy
       when :ignore
-        @adapter.ignore_transform(inserts, records)
+        sql = @adapter.ignore_transform(inserts, records)
       when :override
-        @adapter.on_duplicate_key_update(inserts, records)
-      else inserts
+        sql = @adapter.on_duplicate_key_update(inserts, records)
+      else
+        sql = inserts
       end
+      sql + ";"
     end
 
     def records
