@@ -26,7 +26,7 @@ module Polo
         @adapter.ignore_transform(inserts, records)
       when :override
         @adapter.on_duplicate_key_update(inserts, records)
-      else inserts(true)
+      else inserts(with_semi: true)
       end
     end
 
