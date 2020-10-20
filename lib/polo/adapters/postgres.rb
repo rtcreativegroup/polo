@@ -25,7 +25,7 @@ module Polo
         end
 
         # Conflict on id column
-        on_dup_syntax = "ON CONFLICT (#{record.class.primary_key}) DO UPDATE SET #{values_syntax.join(', ')}"
+        on_dup_syntax = "ON CONFLICT (#{record.class.primary_key}) DO UPDATE SET #{values_syntax.join(', ')};"
 
         "#{insert} #{on_dup_syntax}"
       end

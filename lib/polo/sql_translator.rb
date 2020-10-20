@@ -23,26 +23,26 @@ module Polo
     def to_sql
       case @configuration.on_duplicate_strategy
       when :ignore
-        sql = @adapter.ignore_transform(inserts, records)
+        @adapter.ignore_transform(inserts, records)
       when :override
-        sql = @adapter.on_duplicate_key_update(inserts, records)
-      else
-        sql = inserts
+        @adapter.on_duplicate_key_update(inserts, records)
+      else inserts(true)
       end
-      sql + ";"
     end
 
     def records
       Array.wrap(@record)
     end
 
-    def inserts
+    def inserts(with_semi: false)
       records.map do |record|
         if record.is_a?(Hash)
-          raw_sql_from_hash(record)
+          sql = raw_sql_from_hash(record)
         else
-          raw_sql_from_record(record)
+          sql = raw_sql_from_record(record)
         end
+        return sql + ";" if with_semi
+        sql
       end
     end
 
