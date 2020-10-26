@@ -1,7 +1,7 @@
 module Polo
 
   class Configuration
-    attr_reader :on_duplicate_strategy, :blacklist, :adapter
+    attr_reader :on_duplicate_strategy, :blacklist, :adapter, :batch
 
     def initialize(options={})
       options = { on_duplicate: nil, obfuscate: {}, adapter: :postgres }.merge(options)

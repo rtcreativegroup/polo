@@ -41,8 +41,7 @@ module Polo
         else
           sql = raw_sql_from_record(record)
         end
-        return sql + ";" if with_semi
-        sql
+        with_semi ? sql + ";": sql
       end
     end
 
